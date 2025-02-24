@@ -5,6 +5,7 @@ using UnityEngine;
 public class MovimientoPelota : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameManager manager;
     public float speed;
     float horizontal;
     float vertical;
@@ -24,15 +25,21 @@ public class MovimientoPelota : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
-
         if (collision.gameObject.tag == "Vertical")
         {
             horizontal *= -1;
         }
         if (collision.gameObject.tag == "Horizontal")
         {
-            vertical *= -1;
+            Vector3 dir = transform.position - collision.transform.position;
+            dir.Normalize();
+            horizontal = dir.x;
+            vertical = dir.y;
+        }
+        if(collision.gameObject.tag == "detrasPlayer")
+        {
+            manager.vidas -= 1;
+            Spawn();
         }
     }
 
