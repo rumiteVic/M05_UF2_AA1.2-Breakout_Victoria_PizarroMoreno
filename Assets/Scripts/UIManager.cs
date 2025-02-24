@@ -20,5 +20,9 @@ public class UIManager : MonoBehaviour
     {
         puntuacion.text = manager.puntuacion.ToString();
         vidas.text = manager.vidas.ToString();
+        if(manager.vidas <= 0)
+        {
+            Debug.Log("Fin");
+        }
     }
 }

@@ -8,6 +8,9 @@ TagManager:
   - Vertical
   - detrasPlayer
   - pelota
+  - rojo
+  - verde
+  - azul
   layers:
   - Default
   - TransparentFX

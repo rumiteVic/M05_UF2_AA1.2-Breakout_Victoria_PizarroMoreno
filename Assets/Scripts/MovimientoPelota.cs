@@ -29,7 +29,7 @@ public class MovimientoPelota : MonoBehaviour
         {
             horizontal *= -1;
         }
-        if (collision.gameObject.tag == "Horizontal")
+        if (collision.gameObject.tag == "Horizontal" || collision.gameObject.tag == "Player")
         {
             Vector3 dir = transform.position - collision.transform.position;
             dir.Normalize();
