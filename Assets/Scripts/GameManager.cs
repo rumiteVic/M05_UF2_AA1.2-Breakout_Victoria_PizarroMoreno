@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int puntuacion = 0;
-    public int vidas = 3;
+    public int vidas = 8;
+    public int cantidadBolasExtra = 0;
     // Start is called before the first frame update
     void Start()
     {
