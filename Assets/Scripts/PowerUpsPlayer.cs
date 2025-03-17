@@ -9,6 +9,10 @@ public class PowerUpsPlayer : MonoBehaviour
     public bool verde = false;
     public GameObject pelota;
     public GameManager manager;
+    public GameObject pelotaiz;
+    public GameObject pelotade;
+    public GameObject pelotacentro;
+    int cantidadAdded = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,14 +27,33 @@ public class PowerUpsPlayer : MonoBehaviour
             GameObject pelotaTmp = Instantiate(pelota);
             manager.cantidadBolasExtra += 1;
             manager.vidas += 1;
+            rojo = false;
         }
-        else if (verde)
+        else if(verde)
         {
-            Vector3 direction = new Vector2(3, 0);
-            GameObject pelotaTmp = Instantiate(pelota, transform.position + direction, transform.rotation);
-            GameObject pelotaTmp1 = Instantiate(pelota, transform.position, transform.rotation);
-            Vector3 direction1 = new Vector2(-3, 0);
-            GameObject pelotaTmp2 = Instantiate(pelota, transform.position + direction1, transform.rotation);
+            Vector2 directionIz = new Vector2(transform.position.x -2, transform.position.y +0.5f);
+            GameObject pelotaiztmp = Instantiate(pelotaiz, directionIz, transform.rotation);
+
+            Vector2 directionDe = new Vector2(transform.position.x + 2, transform.position.y +0.5f);
+            GameObject pelotadetmp = Instantiate(pelotade, directionDe, transform.rotation);
+
+            Vector2 directionCentro = new Vector2(transform.position.x, transform.position.y +0.5f);
+            GameObject pelotacentrotmp = Instantiate(pelotacentro, directionCentro, transform.rotation);
+            manager.cantidadBolasExtra += 3;
+            manager.vidas += 3;
+            verde = false;
+        }
+        else if (azul)
+        {
+            for(int i = 0; i < manager.vidas; i++)
+            {
+                GameObject extra = Instantiate(pelota);
+                cantidadAdded++;
+            }
+            manager.cantidadBolasExtra += cantidadAdded;
+            manager.vidas += cantidadAdded;
+            cantidadAdded = 0;
+            azul = false;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

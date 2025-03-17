@@ -52,6 +52,7 @@ public class Bloques : MonoBehaviour
         {
 
         }
+        manager.bloquesTotales -= 1;
         Destroy(bloque);
     }
 }

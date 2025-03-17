@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class MovimientoPelota : MonoBehaviour
 {
@@ -10,12 +11,16 @@ public class MovimientoPelota : MonoBehaviour
     public float speed;
     float horizontal;
     float vertical;
+    public bool iz = false;
+    public bool de = false;
+    public bool centro = false;
     // Start is called before the first frame update
 
     private void Awake()
     {
         manager = FindObjectOfType<GameManager>();
         power = FindObjectOfType<PowerUpsPlayer>();
+        Spawn();
     }
 
     void Start()
@@ -23,17 +28,6 @@ public class MovimientoPelota : MonoBehaviour
         if (manager.cantidadBolasExtra == 0)
         {
             Spawn();
-        }
-        else if (power.rojo)
-        {
-            Debug.Log("rojo");
-            Spawn();
-            power.rojo = false;
-        }
-        else if(power.verde) { }
-        {
-            power.verde = false;
-            SpawnVerde();
         }
     }
 
@@ -76,30 +70,30 @@ public class MovimientoPelota : MonoBehaviour
 
     void Spawn()
     {
-        transform.position = new Vector3(0, 0, 0);
-        horizontal = Random.Range(-1f, 1f);
-        if (horizontal < 0)
+        if (!iz && !de && !centro)
         {
-            horizontal = -1;
+            transform.position = new Vector3(0, 0, 0);
+            horizontal = Random.Range(-1f, 1f);
+            vertical = -1f;
         }
-        else
+        if (iz)
         {
-            horizontal = 1;
+            horizontal = -0.5f;
+            vertical = 1f;
+            iz = false;
         }
-        vertical = -1f;
+        else if (de)
+        {
+            horizontal = 0.5f;
+            vertical = 1f;
+            de = false;
+        }
+        else if (centro)
+        {
+            horizontal = 0f;
+            vertical = 1f;
+            centro = false;
+        }
     }
 
-    void SpawnVerde()
-    {
-        horizontal = Random.Range(-1f, 1f);
-        if (horizontal < 0)
-        {
-            horizontal = -1;
-        }
-        else
-        {
-            horizontal = 1;
-        }
-        vertical = -1f;
-    }
 }
